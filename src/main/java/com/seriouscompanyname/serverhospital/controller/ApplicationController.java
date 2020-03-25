@@ -7,13 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
 public class ApplicationController {
-    public static final int DEFAULT_PAGE_NUMBER = 0;
-    public static final int DEFAULT_RECORDS_PER_PAGE_VALUE = 10;
+    public static final String DEFAULT_PAGE_NUMBER = "0";
+    public static final String DEFAULT_RECORDS_PER_PAGE_VALUE = "10";
 
     private RecordPackRepository recordPackRepository;
 
@@ -23,12 +24,14 @@ public class ApplicationController {
     }
 
     @GetMapping("/packs")
-    public String getRecordPack(@RequestParam String packName) {
+    public String getRecordPack(@RequestParam(name = "name") String packName) {
         return "redirect:/packs/" + packName;
     }
 
     @GetMapping("/packs/{packName}")
-    public String getPage(@PathVariable String packName, @RequestParam String pageNumber) {
+    @ResponseBody
+    public String getPage(@PathVariable String packName,
+                          @RequestParam(defaultValue = DEFAULT_PAGE_NUMBER, name = "page") String pageNumber) {
         return null;
     }
 }
