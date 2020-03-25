@@ -1,16 +1,19 @@
 package com.seriouscompanyname.serverhospital.model;
 
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
+@Entity
 public class Doctor extends Person {
-    @NonNull private String illnessAnalyse;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-    public Doctor(@NonNull String illnessAnalyse, Person person) {
-        super(person);
-        this.illnessAnalyse = illnessAnalyse;
-    }
+    private String illnessAnalyse;
 }

@@ -6,23 +6,17 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Person {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
     private String surname;
     private String name;
     private String middleName;
-
-    public Person(Person person) {
-        this.surname = person.getSurname();
-        this.name = person.getName();
-        this.middleName = person.getMiddleName();
-    }
-
-    public StringProperty getFullName() {
-        return new SimpleStringProperty(surname + " " +
-                name + " " +
-                middleName);
-    }
 }
