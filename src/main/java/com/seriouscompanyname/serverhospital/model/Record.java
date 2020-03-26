@@ -12,6 +12,9 @@ public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @ManyToOne
+    private RecordPack pack;
     @OneToOne
     private Student student;
     @OneToOne
