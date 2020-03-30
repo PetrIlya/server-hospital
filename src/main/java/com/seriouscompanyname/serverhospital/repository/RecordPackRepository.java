@@ -13,17 +13,4 @@ import java.util.Optional;
 public interface RecordPackRepository extends CrudRepository<RecordPack, Long> {
     RecordPack getRecordPackByName(String name);
 
-    default List<Record> getRecordPackPage(String name,
-                                           int recordPerPageValue,
-                                           int pageNumber) {
-        List<Record> page = null;
-        try {
-            page = Lists.partition(getRecordPackByName(name).getRecords(),
-                    recordPerPageValue).get(pageNumber);
-            return page;
-        } catch (Exception e) {
-            return page;
-        }
-    }
-
 }
