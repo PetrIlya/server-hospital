@@ -8,7 +8,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.List;
 
-public interface RecordRepository extends CrudRepository<Record, Long>,
-        PagingAndSortingRepository<Record, Long> {
+public interface RecordRepository extends CrudRepository<Record, Long> {
     List<Record> getRecordByPack(RecordPack pack, Pageable pageable);
 }
