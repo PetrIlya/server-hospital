@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

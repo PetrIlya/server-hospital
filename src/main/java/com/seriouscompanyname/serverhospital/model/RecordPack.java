@@ -1,6 +1,7 @@
 package com.seriouscompanyname.serverhospital.model;
 
 import lombok.Data;
+import org.hibernate.validator.constraints.UniqueElements;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,6 +13,7 @@ public class RecordPack {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(unique = true)
     private String name;
 
     @OneToMany
