@@ -1,8 +1,6 @@
 package com.seriouscompanyname.serverhospital.model;
 
 import lombok.Data;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
@@ -15,8 +13,8 @@ public class Record {
 
     @ManyToOne
     private RecordPack pack;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "record")
     private Student student;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "record")
     private Doctor doctor;
 }

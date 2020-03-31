@@ -1,4 +1,4 @@
-package com.seriouscompanyname.serverhospital.utils;
+package com.seriouscompanyname.serverhospital.model.converter;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;

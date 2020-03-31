@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RecordPackRepository extends CrudRepository<RecordPack, Long> {
     RecordPack getRecordPackByName(String name);
+
+    boolean existsByName(String name);
 }

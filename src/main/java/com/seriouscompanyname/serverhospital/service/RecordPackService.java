@@ -1,8 +1,20 @@
 package com.seriouscompanyname.serverhospital.service;
 
 import com.seriouscompanyname.serverhospital.model.RecordPack;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.lang.NonNull;
 
-public interface RecordPackService extends CrudRepository<RecordPack, Long> {
+import java.util.List;
+
+public interface RecordPackService {
     RecordPack getRecordPackByName(String name);
+
+    boolean existsByName(String name);
+
+    <S extends RecordPack> S save(@NonNull S s);
+
+    Iterable<RecordPack> findAll();
+
+    void delete(@NonNull RecordPack pack);
+
+    List<String> getAllRecordPackNames();
 }
