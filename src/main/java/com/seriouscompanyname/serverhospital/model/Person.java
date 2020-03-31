@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

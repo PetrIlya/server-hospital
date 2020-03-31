@@ -1,4 +1,4 @@
-package com.seriouscompanyname.serverhospital.model.dto;
+package com.seriouscompanyname.serverhospital.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

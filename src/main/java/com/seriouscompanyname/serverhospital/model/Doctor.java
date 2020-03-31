@@ -7,13 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Entity
 public class Doctor extends Person {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
 
     private String illnessAnalyse;
 }
