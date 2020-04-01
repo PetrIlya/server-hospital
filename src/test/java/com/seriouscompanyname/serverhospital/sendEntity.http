@@ -1,3 +1,7 @@
+GET https://fx-server.herokuapp.com/
+Accept: text/html
+
+###
 POST http://localhost:8080/add-pack
 Content-Type: application/x-www-form-urlencoded
 

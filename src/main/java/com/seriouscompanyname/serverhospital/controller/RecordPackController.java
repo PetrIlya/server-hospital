@@ -27,6 +27,7 @@ public class RecordPackController {
     @GetMapping("/")
     @ResponseBody
     public String startServer() {
+        System.out.println("No errors occured");
         return "server started";
     }
 
