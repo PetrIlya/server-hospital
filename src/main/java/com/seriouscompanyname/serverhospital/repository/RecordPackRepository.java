@@ -9,4 +9,6 @@ public interface RecordPackRepository extends CrudRepository<RecordPack, Long> {
     RecordPack getRecordPackByName(String name);
 
     boolean existsByName(String name);
+
+    void deleteByName(String name);
 }

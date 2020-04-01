@@ -14,7 +14,7 @@ public interface RecordPackService {
 
     Iterable<RecordPack> findAll();
 
-    void delete(@NonNull RecordPack pack);
+    void deleteByName(String name);
 
     List<String> getAllRecordPackNames();
 }

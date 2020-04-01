@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
 @Controller
@@ -27,16 +26,22 @@ public class RecordPackController {
 
     @GetMapping(value = "/packs", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> getAllAviablePackNames() {
+    public List<String> getAllPackNames() {
         return recordPackService.getAllRecordPackNames();
     }
 
-    @Deprecated
-    @PostMapping(value = "/add-pack",
-            produces = MediaType.APPLICATION_JSON_VALUE,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public void addRecordPack(RecordPack pack) {
+    @PostMapping(value = "/add-pack")
+    public String addRecordPack(@RequestParam(name = "name") String packName) {
+        RecordPack pack = new RecordPack();
+        pack.setRecords(Collections.emptyList());
+        pack.setName(packName);
         recordPackService.save(pack);
+        return "redirect:/packs" + "/" + packName;
+    }
+
+    @DeleteMapping(value = "/delete-pack")
+    public String deleteRecordPack(@RequestParam(name = "name") String packName) {
+        recordPackService.deleteByName(packName);
+        return "redirect:/packs";
     }
 }

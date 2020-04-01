@@ -1,0 +1,13 @@
+POST http://localhost:8080/add-pack
+Content-Type: application/x-www-form-urlencoded
+
+name=students
+
+###
+
+DELETE http://localhost:8080/delete-pack
+Content-Type: application/x-www-form-urlencoded
+
+name=students
+
+###
