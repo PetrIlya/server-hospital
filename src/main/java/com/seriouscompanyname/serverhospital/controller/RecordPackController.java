@@ -13,8 +13,6 @@ import java.util.List;
 
 @Controller
 public class RecordPackController {
-    public static final String DEFAULT_PAGE_NUMBER = "0";
-    public static final String DEFAULT_RECORDS_PER_PAGE_VALUE = "10";
 
     @Qualifier("recordPackServiceImpl")
     private RecordPackService recordPackService;
