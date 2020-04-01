@@ -24,6 +24,12 @@ public class RecordPackController {
         this.recordPackService = recordPackService;
     }
 
+    @GetMapping("/")
+    @ResponseBody
+    public String startServer() {
+        return "server started";
+    }
+
     @GetMapping(value = "/packs", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> getAllPackNames() {
