@@ -32,7 +32,7 @@ public class RecordPackController {
     }
 
     @Deprecated
-    @PostMapping(value = "/packs/add",
+    @PostMapping(value = "/add-pack",
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody

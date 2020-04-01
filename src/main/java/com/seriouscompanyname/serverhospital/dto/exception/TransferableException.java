@@ -1,4 +1,4 @@
-package com.seriouscompanyname.serverhospital.dto;
+package com.seriouscompanyname.serverhospital.dto.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
