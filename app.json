@@ -1,0 +1,11 @@
+{
+  "name": "server-hospital",
+  "description": "A Spring MVC + Postgres + Heroku",
+  "repository": "https://github.com/PetrIlya/server-hospital",
+  "keywords": [
+    "Spring Boot",
+    "Heroku",
+    "Deployment",
+    "Postgres"
+  ]
+}
