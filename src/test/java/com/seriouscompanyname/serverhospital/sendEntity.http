@@ -1,5 +1,5 @@
-GET https://fx-server.herokuapp.com/
-Accept: text/html
+GET https://fx-server.herokuapp.com/packs
+Accept: application/json
 
 ###
 POST http://localhost:8080/add-pack
