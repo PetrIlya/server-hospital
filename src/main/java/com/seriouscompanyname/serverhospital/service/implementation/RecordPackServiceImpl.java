@@ -10,10 +10,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 public class RecordPackServiceImpl implements RecordPackService {
@@ -36,15 +33,7 @@ public class RecordPackServiceImpl implements RecordPackService {
 
     @Override
     public List<String> getAllRecordPackNames() {
-        Iterable<RecordPack> packs = repository.findAll();
-        if (packs.spliterator().getExactSizeIfKnown() == 0) {
-            return Collections.emptyList();
-        }
-        return StreamSupport.stream(
-                packs.spliterator(),
-                false).
-                map(RecordPack::getName).
-                collect(Collectors.toList());
+        return repository.getAllRecordPackNames();
     }
 
     @Override

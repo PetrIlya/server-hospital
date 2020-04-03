@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@SpringBootApplication(scanBasePackages = "com.seriouscompanyname.serverhospital")
+@SpringBootApplication
 public class ServerHospitalApplication {
 
     public static void main(String[] args) {

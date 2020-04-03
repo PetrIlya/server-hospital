@@ -41,7 +41,7 @@ public class RecordPackController {
         pack.setRecords(Collections.emptyList());
         pack.setName(packName);
         recordPackService.save(pack);
-        return "redirect:/packs" + "/" + packName;
+        return "redirect:/packs/" + packName;
     }
 
     @DeleteMapping(value = "/delete-pack")
