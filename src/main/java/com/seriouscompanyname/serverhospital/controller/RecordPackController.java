@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
+@RequestMapping("/packs")
 public class RecordPackController {
 
     @Qualifier("recordPackServiceImpl")
@@ -22,20 +23,13 @@ public class RecordPackController {
         this.recordPackService = recordPackService;
     }
 
-    @GetMapping("/")
-    @ResponseBody
-    public String startServer() {
-        System.out.println("No errors occured");
-        return "server started";
-    }
-
-    @GetMapping(value = "/packs", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<String> getAllPackNames() {
         return recordPackService.getAllRecordPackNames();
     }
 
-    @PostMapping(value = "/add-pack")
+    @PostMapping
     public String addRecordPack(@RequestParam(name = "name") String packName) {
         RecordPack pack = new RecordPack();
         pack.setRecords(Collections.emptyList());
@@ -44,7 +38,7 @@ public class RecordPackController {
         return "redirect:/packs/" + packName;
     }
 
-    @DeleteMapping(value = "/delete-pack")
+    @DeleteMapping
     public String deleteRecordPack(@RequestParam(name = "name") String packName) {
         recordPackService.deleteByName(packName);
         return "redirect:/packs";
