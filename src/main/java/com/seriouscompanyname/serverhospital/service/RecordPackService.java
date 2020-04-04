@@ -1,5 +1,6 @@
 package com.seriouscompanyname.serverhospital.service;
 
+import com.seriouscompanyname.serverhospital.dto.PackInformation;
 import com.seriouscompanyname.serverhospital.model.RecordPack;
 import org.springframework.lang.NonNull;
 
@@ -16,5 +17,5 @@ public interface RecordPackService {
 
     void deleteByName(String name);
 
-    List<String> getAllRecordPackNames();
+    List<PackInformation> getAllPacksInformation();
 }

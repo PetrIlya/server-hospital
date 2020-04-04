@@ -7,6 +7,7 @@ import com.seriouscompanyname.serverhospital.model.RecordPack;
 import com.seriouscompanyname.serverhospital.repository.RecordRepository;
 import com.seriouscompanyname.serverhospital.service.RecordService;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,14 @@ import java.util.stream.Collectors;
 
 @Service
 public class RecordServiceImpl implements RecordService {
-    private RecordRepository record;
 
+    private RecordRepository record;
     private ModelMapper mapper = new ModelMapper();
+
+    @Autowired
+    public RecordServiceImpl(RecordRepository record) {
+        this.record = record;
+    }
 
     @Override
     public void deleteByCondition(ConditionObject condition) {

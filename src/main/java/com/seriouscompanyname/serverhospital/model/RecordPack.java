@@ -14,6 +14,11 @@ public class RecordPack {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pack")
+    @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, mappedBy = "pack")
     private List<Record> records;
+
+    public void addRecord(Record record) {
+        this.records.add(record);
+        record.setPack(this);
+    }
 }

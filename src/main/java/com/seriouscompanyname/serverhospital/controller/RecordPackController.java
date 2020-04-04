@@ -1,5 +1,6 @@
 package com.seriouscompanyname.serverhospital.controller;
 
+import com.seriouscompanyname.serverhospital.dto.PackInformation;
 import com.seriouscompanyname.serverhospital.model.RecordPack;
 import com.seriouscompanyname.serverhospital.service.RecordPackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class RecordPackController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<String> getAllPackNames() {
-        return recordPackService.getAllRecordPackNames();
+    public List<PackInformation> getAllPacksInformation() {
+        return recordPackService.getAllPacksInformation();
     }
 
     @PostMapping
