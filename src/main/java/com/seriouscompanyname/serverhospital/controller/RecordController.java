@@ -1,5 +1,6 @@
 package com.seriouscompanyname.serverhospital.controller;
 
+import com.seriouscompanyname.serverhospital.dto.ConditionObject;
 import com.seriouscompanyname.serverhospital.dto.model.RecordDTO;
 import com.seriouscompanyname.serverhospital.model.Doctor;
 import com.seriouscompanyname.serverhospital.model.Record;
@@ -30,7 +31,7 @@ public class RecordController {
         this.recordPackRepository = recordPackRepository;
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"page", "size"})
     @ResponseBody
     public List<RecordDTO> getRecordPackPage(@PathVariable String packName,
                                              @RequestParam(name = "page", defaultValue = "0") String page,
@@ -40,6 +41,13 @@ public class RecordController {
                         recordPackRepository.getRecordPackByName(packName),
                         PageRequest.of(Integer.parseInt(page),
                                 Integer.parseInt(size)));
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<RecordDTO> getRecordPackPage(@PathVariable String packName,
+                                             @RequestBody ConditionObject conditionObject) {
+        return recordService.findByCondition(packName, conditionObject);
     }
 
     @PutMapping
@@ -64,6 +72,13 @@ public class RecordController {
         recordPackRepository.getRecordPackByName(packName).addRecord(record);
         recordService.save(record);
         return "redirect:/packs/" + packName;
+    }
+
+    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<RecordDTO> deleteByCondition(@PathVariable String packName,
+                                             @RequestBody ConditionObject conditionObject) {
+        return recordService.deleteByCondition(packName, conditionObject);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

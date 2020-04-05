@@ -2,7 +2,7 @@ GET http://localhost:8080/packs/vasek
 Accept: application/json
 
 ###
-GET https://fx-server.herokuapp.com/packs
+GET http://localhost:8080/packs
 Accept: application/json
 
 ###

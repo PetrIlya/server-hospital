@@ -4,6 +4,7 @@ import com.seriouscompanyname.serverhospital.dto.ConditionObject;
 import com.seriouscompanyname.serverhospital.dto.model.RecordDTO;
 import com.seriouscompanyname.serverhospital.model.Record;
 import com.seriouscompanyname.serverhospital.model.RecordPack;
+import com.seriouscompanyname.serverhospital.repository.RecordPackRepository;
 import com.seriouscompanyname.serverhospital.repository.RecordRepository;
 import com.seriouscompanyname.serverhospital.service.RecordService;
 import org.modelmapper.ModelMapper;
@@ -17,22 +18,49 @@ import java.util.stream.Collectors;
 @Service
 public class RecordServiceImpl implements RecordService {
 
-    private RecordRepository record;
+    private RecordRepository recordRepository;
+    private RecordPackRepository recordPackRepository;
     private ModelMapper mapper = new ModelMapper();
 
     @Autowired
     public RecordServiceImpl(RecordRepository record) {
-        this.record = record;
+        this.recordRepository = record;
+    }
+
+    @Autowired
+    public void setRecordPackRepository(RecordPackRepository recordPackRepository) {
+        this.recordPackRepository = recordPackRepository;
     }
 
     @Override
-    public void deleteByCondition(ConditionObject condition) {
-        //TODO: Implement method
+    public List<RecordDTO> deleteByCondition(String packName, ConditionObject condition) {
+        List<Record> recordsToDelete = recordPackRepository.
+                getRecordPackByName(packName).
+                getRecords().
+                stream().
+                filter(condition::meetsSearchRequirements).
+                collect(Collectors.toList());
+        recordRepository.deleteAll(recordsToDelete);
+        return recordsToDelete.
+                stream().
+                map(record -> mapper.map(record, RecordDTO.class)).
+                collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecordDTO> findByCondition(String packName, ConditionObject condition) {
+        return recordPackRepository.
+                getRecordPackByName(packName).
+                getRecords().
+                stream().
+                filter(condition::meetsSearchRequirements).
+                map(record -> mapper.map(record, RecordDTO.class)).
+                collect(Collectors.toList());
     }
 
     @Override
     public List<RecordDTO> getRecordByPack(RecordPack pack, Pageable pageable) {
-        return record.getRecordByPack(pack, pageable).
+        return recordRepository.getRecordByPack(pack, pageable).
                 stream().
                 map(e -> mapper.map(e, RecordDTO.class)).
                 collect(Collectors.toList());
@@ -40,6 +68,6 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public <S extends Record> S save(S s) {
-        return record.save(s);
+        return recordRepository.save(s);
     }
 }

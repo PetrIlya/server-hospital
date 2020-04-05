@@ -10,7 +10,9 @@ import org.springframework.lang.NonNull;
 import java.util.List;
 
 public interface RecordService {
-    void deleteByCondition(ConditionObject condition);
+    List<RecordDTO> deleteByCondition(String packName, ConditionObject condition);
+
+    List<RecordDTO> findByCondition(String packName, ConditionObject condition);
 
     List<RecordDTO> getRecordByPack(RecordPack pack, Pageable pageable);
 

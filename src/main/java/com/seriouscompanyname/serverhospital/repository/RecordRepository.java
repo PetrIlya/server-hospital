@@ -9,4 +9,6 @@ import java.util.List;
 
 public interface RecordRepository extends CrudRepository<Record, Long> {
     List<Record> getRecordByPack(RecordPack pack, Pageable pageable);
+
+    List<Record> getRecordByPack(RecordPack pack);
 }

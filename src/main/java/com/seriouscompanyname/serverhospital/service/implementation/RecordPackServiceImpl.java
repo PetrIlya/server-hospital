@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class RecordPackServiceImpl implements RecordPackService {
@@ -40,13 +41,14 @@ public class RecordPackServiceImpl implements RecordPackService {
 
     @Override
     public List<PackInformation> getAllPacksInformation() {
-        List<String> packNames = recordPackRepository.getAllRecordPackNames();
-        TypedQuery<PackInformation> informationTypedQuery = entityManager.
-                createQuery("select " +
-                        "pack.name, " +
-                        "count (pack.records) from RecordPack pack", PackInformation.class);
-        return informationTypedQuery.getResultList();
+        return StreamSupport.
+                stream(recordPackRepository.findAll().spliterator(), false).
+                map(pack -> new PackInformation(
+                        pack.getName(),
+                        pack.getRecords().size())).
+                collect(Collectors.toList());
     }
+
 
     @Override
     public boolean existsByName(String name) {
