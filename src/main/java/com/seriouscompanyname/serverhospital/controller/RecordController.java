@@ -2,7 +2,6 @@ package com.seriouscompanyname.serverhospital.controller;
 
 import com.seriouscompanyname.serverhospital.dto.ConditionObject;
 import com.seriouscompanyname.serverhospital.dto.model.RecordDTO;
-import com.seriouscompanyname.serverhospital.repository.RecordPackRepository;
 import com.seriouscompanyname.serverhospital.service.RecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,12 +17,10 @@ public class RecordController {
 
     @Qualifier("recordServiceImpl")
     private RecordService recordService;
-    private RecordPackRepository recordPackRepository;
 
     @Autowired
-    public void setRecordService(RecordService recordService, RecordPackRepository recordPackRepository) {
+    public void setRecordService(RecordService recordService) {
         this.recordService = recordService;
-        this.recordPackRepository = recordPackRepository;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, params = {"page", "size"})
@@ -35,39 +32,17 @@ public class RecordController {
                 getRecordByPack(packName, page, size);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/search",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<RecordDTO> getRecordPackPage(@PathVariable String packName,
+    public List<RecordDTO> searchByCondition(@PathVariable String packName,
                                              @RequestBody ConditionObject conditionObject) {
         return recordService.findByCondition(packName, conditionObject);
     }
 
-    @PutMapping
-    public String addMockRecord(@PathVariable String packName) {
-        return "redirect:/packs/{packName}";
-//        Record record = new Record();
-//
-//        Student student = new Student();
-//        student.setSurname("A");
-//        student.setName("B");
-//        student.setMiddleName("C");
-//        student.setIllnessDate(LocalDate.now());
-//        student.setBirthDate(LocalDate.now());
-//
-//        Doctor doctor = new Doctor();
-//        doctor.setSurname("A");
-//        doctor.setName("B");
-//        doctor.setMiddleName("C");
-//        doctor.setIllnessAnalyse("AAA");
-//
-//        record.setStudent(student);
-//        record.setDoctor(doctor);
-//        recordPackRepository.getRecordPackByName(packName).addRecord(record);
-//        recordService.save(record);
-//        return "redirect:/packs/" + packName;
-    }
-
-    @DeleteMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
+    @PostMapping(value = "/delete",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public List<RecordDTO> deleteByCondition(@PathVariable String packName,
                                              @RequestBody ConditionObject conditionObject) {
