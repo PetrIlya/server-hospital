@@ -12,6 +12,7 @@ public class RecordPack {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column(unique = true)
     private String name;
 
     @OneToMany(cascade = {CascadeType.ALL, CascadeType.REMOVE}, mappedBy = "pack")
