@@ -22,4 +22,9 @@ public class RecordPack {
         this.records.add(record);
         record.setPack(this);
     }
+
+    public void removeRecord(Record record) {
+        this.records.remove(record);
+        record.setPack(null);
+    }
 }

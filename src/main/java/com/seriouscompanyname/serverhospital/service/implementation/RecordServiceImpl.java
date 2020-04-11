@@ -3,6 +3,7 @@ package com.seriouscompanyname.serverhospital.service.implementation;
 import com.seriouscompanyname.serverhospital.dto.ConditionObject;
 import com.seriouscompanyname.serverhospital.dto.model.RecordDTO;
 import com.seriouscompanyname.serverhospital.model.Record;
+import com.seriouscompanyname.serverhospital.model.RecordPack;
 import com.seriouscompanyname.serverhospital.repository.RecordPackRepository;
 import com.seriouscompanyname.serverhospital.repository.RecordRepository;
 import com.seriouscompanyname.serverhospital.service.RecordService;
@@ -37,12 +38,16 @@ public class RecordServiceImpl implements RecordService {
     @Override
     @Transactional
     public List<RecordDTO> deleteByCondition(String packName, ConditionObject condition) {
-        List<Record> recordsToDelete = recordPackRepository.
-                getRecordPackByName(packName).
+        RecordPack pack = recordPackRepository.
+                getRecordPackByName(packName);
+        List<Record> recordsToDelete = pack.
                 getRecords().
                 stream().
                 filter(condition::meetsSearchRequirements).
                 collect(Collectors.toList());
+
+        recordsToDelete.forEach(pack::removeRecord);
+
         recordRepository.deleteAll(recordsToDelete);
         return recordsToDelete.
                 stream().
